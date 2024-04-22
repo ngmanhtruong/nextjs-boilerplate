@@ -20,6 +20,7 @@ export default function LocaleSwitcher() {
       defaultValue={locale}
       onChange={handleChange}
       className="border border-gray-300 font-medium focus:outline-none focus-visible:ring"
+      data-testid="locale-switcher-select"
     >
       {AppConfig.locales.map((elt) => (
         <MenuItem key={elt} value={elt}>
