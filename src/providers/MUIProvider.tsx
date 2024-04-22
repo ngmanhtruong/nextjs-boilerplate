@@ -1,3 +1,4 @@
+'use client'
 import type React from 'react'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import {

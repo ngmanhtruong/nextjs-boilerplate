@@ -1,4 +1,11 @@
-import { ClerkProvider as Provider } from '@clerk/nextjs'
+'use client'
+
+import {
+  ClerkProvider as Provider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from '@clerk/nextjs'
 import type React from 'react'
 
 /**
@@ -6,5 +13,12 @@ import type React from 'react'
  * @link https://clerk.com/docs
  */
 export default function ClerkProvider({ children }: React.PropsWithChildren) {
-  return <Provider>{children}</Provider>
+  return (
+    <Provider>
+      <SignedIn>{children}</SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </Provider>
+  )
 }

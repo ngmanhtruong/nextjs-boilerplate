@@ -1,9 +1,14 @@
 import React, { ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
 import MUIProvider from '@/providers/MUIProvider'
+import { NextIntlClientProvider } from 'next-intl'
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return <MUIProvider>{children}</MUIProvider>
+  return (
+    <MUIProvider>
+      <NextIntlClientProvider locale="en">{children}</NextIntlClientProvider>
+    </MUIProvider>
+  )
 }
 
 const customRender = (

@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import ClerkProvider from '@/providers/ClerkProvider'
 import MUIProvider from '@/providers/MUIProvider'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { AppConfig } from '@/utils/AppConfig'
+import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'Mystict Boilerplate',
@@ -9,16 +12,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode
+  params: { locale: string }
 }) {
+  console.log({ locale })
+  // Validate that the incoming `locale` parameter is valid
+  if (!AppConfig.locales.includes(locale)) notFound()
+
+  // Using internationalization in Client Components
+  const messages = useMessages()
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <MUIProvider>
-          <body>{children}</body>
-        </MUIProvider>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body>
+        <ClerkProvider>
+          <MUIProvider>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <main>{children}</main>
+            </NextIntlClientProvider>
+          </MUIProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }
