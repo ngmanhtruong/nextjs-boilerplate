@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { Metadata } from 'next'
+import { useTranslations } from 'next-intl'
 
 export const metadata: Metadata = {
   title: 'Mystict Next.js Boilerplate',
@@ -8,10 +9,11 @@ export const metadata: Metadata = {
   keywords: 'mystict, boilerplate, nextjs, css, typescript',
 }
 export default function Home() {
+  const t = useTranslations('Dashboard')
   return (
     <main>
       <Box>
-        <Typography>Welcome</Typography>
+        <Typography>{t('meta_title')}</Typography>
       </Box>
     </main>
   )
