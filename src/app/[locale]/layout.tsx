@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import ClerkProvider from '@/providers/ClerkProvider'
 import MUIProvider from '@/providers/MUIProvider'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { AppConfig } from '@/utils/AppConfig'
@@ -24,15 +23,13 @@ export default function RootLayout({
   // Using internationalization in Client Components
   const messages = useMessages()
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
-        <ClerkProvider>
-          <MUIProvider>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              <main>{children}</main>
-            </NextIntlClientProvider>
-          </MUIProvider>
-        </ClerkProvider>
+        <MUIProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <main>{children}</main>
+          </NextIntlClientProvider>
+        </MUIProvider>
       </body>
     </html>
   )

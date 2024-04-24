@@ -9,14 +9,15 @@ const intlMiddleware = createMiddleware({
   defaultLocale: AppConfig.defaultLocale,
 })
 
+// Create a route matcher for protected routes
 const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/forum(.*)'])
 
 export default clerkMiddleware((auth, req) => {
-  // Execute next-intl middleware before Clerk's auth middleware
   if (!auth().userId && isProtectedRoute(req)) {
     return auth().redirectToSignIn()
   }
 
+  // Execute next-intl middleware before Clerk's auth middleware
   return intlMiddleware(req)
 })
 
